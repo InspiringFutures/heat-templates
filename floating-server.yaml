@@ -40,10 +40,10 @@ resources:
       security_groups:
         - Main server
   association:
-    type: OS::Nova::FloatingIPAssociation
+    type: AWS::EC2::EIPAssociation
     properties:
-      floating_ip: {get_param: ip}
-      server_id: { get_resource: server }
+      EIP: {get_param: ip}
+      InstanceId: { get_resource: server }
 
 outputs:
   server_ip:

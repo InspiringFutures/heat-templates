@@ -51,7 +51,7 @@ resources:
   volume_attachment:
     type: OS::Cinder::VolumeAttachment
     properties:
-      volume_id: { get_attr: db_volume }
+      volume_id: { get_param: db_volume }
       instance_uuid: { get_resource: server }
       mountpoint: /dev/sdb
 

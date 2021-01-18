@@ -21,6 +21,9 @@ parameters:
   ip:
     type: string
     description: Floating IP to claim
+  db_volume:
+    type: string
+    description: DB volume ID to use
 
 resources:
   server:
@@ -45,6 +48,12 @@ resources:
     properties:
       EIP: {get_param: ip}
       InstanceId: { get_resource: server }
+  volume_attachment:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_attr: db_volume }
+      instance_uuid: { get_resource: server }
+      mountpoint: /dev/sdb
 
 outputs:
   server_ip:

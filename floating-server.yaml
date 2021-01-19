@@ -33,6 +33,7 @@ resources:
       image: {get_param: image}
       key_name: {get_param: key_name}
       user_data: {get_param: user_data}
+      metadata: {}
       user_data_format: RAW
       networks:
         - port: { get_resource: port }

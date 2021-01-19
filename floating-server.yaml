@@ -21,7 +21,7 @@ parameters:
   ip:
     type: string
     description: Floating IP to claim
-  db_volume:
+  data_volume:
     type: string
     description: DB volume ID to use
 
@@ -32,7 +32,6 @@ resources:
       flavor: {get_param: flavor}
       image: {get_param: image}
       key_name: {get_param: key_name}
-      metadata: {get_param: metadata}
       user_data: {get_param: user_data}
       user_data_format: RAW
       networks:
@@ -51,9 +50,8 @@ resources:
   volume_attachment:
     type: OS::Cinder::VolumeAttachment
     properties:
-      volume_id: { get_param: db_volume }
+      volume_id: { get_param: data_volume }
       instance_uuid: { get_resource: server }
-      mountpoint: /dev/sdb
 
 outputs:
   server_ip:
